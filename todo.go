@@ -3,10 +3,9 @@ package main
 import (
 	"database/sql"
 
-	"go-echo-vue/handlers"
+	"./handlers"
 
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -22,7 +21,8 @@ func main() {
 	e.PUT("/tasks", handlers.PutTask(db))
 	e.DELETE("/tasks/:id", handlers.DeleteTask(db))
 
-	e.Run(standard.New(":8000"))
+	// Run command no longer used in echo
+	e.Logger.Fatal(e.Start(":8000"))
 }
 
 func initDB(filepath string) *sql.DB {
